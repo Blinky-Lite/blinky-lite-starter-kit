@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  blinky:
+    image: blinkylite/blinky-bus-serial-tray:5.0-${HARDWARE}
+    group_add:
+      - dialout
+    devices:
+      - ${SERIALPORT}:/dev/ttyACM0
+    ports:
+      - "${NODEREDPORT}:1881"
+    environment:
+      - MQTTCLIENTID=${TRAY}-${TRAYNAME}
+      - MQTTSUBSCRIBE=blinky-lite-box/${TRAY}/${TRAYNAME}/setting/#
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${MQTTUSERNAME}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=${MQTTPORT}
+      - SERIALBUFSIZE=${SERIALBUFSIZE}
+      - POLLINTERVAL=${POLLINTERVAL}
+      - BAUDRATE=${BAUDRATE}
+  

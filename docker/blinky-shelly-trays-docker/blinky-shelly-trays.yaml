@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  blinky:
+    image: blinkylite/blinky-shelly-trays:5.0-amd64
+    ports:
+      - "${NODEREDPORT}:60429"
+    environment:
+      - MQTTCLIENTID=${TRAYTYPE}-trays
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${MQTTUSERNAME}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=${MQTTPORT}
+

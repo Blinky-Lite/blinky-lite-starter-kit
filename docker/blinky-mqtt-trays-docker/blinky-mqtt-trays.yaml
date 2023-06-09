@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  blinky:
+    image: blinkylite/blinky-mqtt-trays:5.0-amd64
+    ports:
+      - "${NODEREDPORT}:60428"
+    environment:
+      - GIZMOMQTTSETTINGSUBSCRIBE=blinky-lite-box/${TRAYTYPE}/+/setting/#
+      - MQTTCLIENTID=${TRAYTYPE}-trays
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${MQTTUSERNAME}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=${MQTTPORT}
+

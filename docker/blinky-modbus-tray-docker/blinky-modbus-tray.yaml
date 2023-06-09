@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  blinky:
+    image: blinkylite/blinky-modbus-tray:5.0-${HARDWARE}
+    ports:
+      - "${NODEREDPORT}:1880"
+    environment:
+      - MQTTCLIENTID=${TRAY}-${TRAYNAME}
+      - MQTTSUBSCRIBE=blinky-lite-box/${TRAY}/${TRAYNAME}/setting/#
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${MQTTUSERNAME}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=${MQTTPORT}
+      - TESTMODE=${TESTMODE}
+      - MODBUSIP=${MODBUSIP}
+      - MODBUSPORT=${MODBUSPORT}
+  

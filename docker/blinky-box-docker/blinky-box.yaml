@@ -1,0 +1,76 @@
+version: "3.4"
+  
+services:
+  mongo:
+    image: blinkylite/blinky-mongo:5.0
+    command: mongod --quiet --logpath /dev/null
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=${BLINKYLITE_PASSWORD}
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo blinky-box-docker-mongo-1:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+  mongo-express:
+    image: mongo-express:0.54
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "${EXPRESSPORT}:8081"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${BLINKYLITE_PASSWORD}
+      - ME_CONFIG_MONGODB_SERVER=blinky-box-docker-mongo-1
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=${BLINKYLITE_PASSWORD}
+  mosquitto:
+    image: blinkylite/blinky-mqtt:5.0
+    ports:
+      - "${MQTTPORT}:1883"
+      - "9001:9001"
+    volumes:
+      - ./mqtt-auth:/mqtt-auth
+    depends_on:
+      blinky:
+        condition: service_healthy
+  blinky:
+    image: blinkylite/blinky-lite-box:5.0-amd64
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "${BLINKYPORT}:60427"
+    volumes:
+      - ./index.html:/data/html-static/index.html
+      - ./homepage:/data/html-static/homepage
+      - ./blinky-lite-icons:/data/html-static/img
+      - ./mqtt-auth:/data/mqtt-auth
+    environment:
+      - JWTKEYSECRET=${JWTKEYSECRET}
+      - MQTTPASSWORD=${BLINKYLITE_PASSWORD}
+      - MQTTPORT=${MQTTPORT}
+      - MONGODBIP=mongodb://admin:${BLINKYLITE_PASSWORD}@blinky-box-docker-mongo-1:27017/blinky-lite?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-256
+      - NEXMOAPIKEY=${NEXMOAPIKEY}
+      - NEXMOAPISECRET=${NEXMOAPISECRET}
+      - MAXDBSIZE=${MAXDBSIZE}
+      - TWOFA=${TWOFA}
+      - ENABLEARCHIVE=${ENABLEARCHIVE}
+      - BOXUSERPW=${BLINKYLITE_PASSWORD}
+    healthcheck:
+      test: curl --fail http://localhost:60427/health || exit 1
+      interval: 3s
+      timeout: 3s
+      retries: 15
+      start_period: 3s
+volumes:
+  mongo-data:
+    driver: local      
+      
