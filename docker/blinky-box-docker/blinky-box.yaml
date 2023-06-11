@@ -64,6 +64,7 @@ services:
       - TWOFA=${TWOFA}
       - ENABLEARCHIVE=${ENABLEARCHIVE}
       - BOXUSERPW=${BLINKYLITE_PASSWORD}
+      - REQUIREHTTPS=${REQUIREHTTPS}
     healthcheck:
       test: curl --fail http://localhost:60427/health || exit 1
       interval: 3s
