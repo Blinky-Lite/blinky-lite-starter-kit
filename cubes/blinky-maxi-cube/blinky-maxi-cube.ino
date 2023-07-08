@@ -33,8 +33,8 @@ void setup()
   BlinkyEtherCube.setBlMqttSocketTimeout(4);
   
   // Must be included
-  BlinkyEtherCube.setMqttServer(mac, "192.168.1.163", "maxi-01", "blinky-lite");
-  BlinkyEtherCube.setMqttTray("blinky-mqtt","maxi-01");
+  BlinkyEtherCube.setMqttServer(mac, "192.168.1.161", "blinky-lite-box-01-blinky-mqtt-maxi-01", "areallybadpassword");
+  BlinkyEtherCube.setMqttTray("blinky-lite-box-01","blinky-mqtt","maxi-01");
   BlinkyEtherCube.init(&cubeData);
 
   lastPublishTime = millis();

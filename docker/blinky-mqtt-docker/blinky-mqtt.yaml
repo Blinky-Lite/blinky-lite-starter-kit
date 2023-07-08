@@ -1,0 +1,10 @@
+version: "3.4"
+  
+services:
+  mosquitto:
+    image: blinkylite/blinky-mqtt:5.0
+    ports:
+      - "${MQTTPORT}:1883"
+    volumes:
+      - ./mqtt-auth:/mqtt-auth
+      
