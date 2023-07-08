@@ -5,10 +5,13 @@ services:
     ports:
       - "${NODEREDPORT}:60428"
     environment:
-      - GIZMOMQTTSETTINGSUBSCRIBE=blinky-lite-box/${TRAYTYPE}/+/setting/#
-      - MQTTCLIENTID=${TRAYTYPE}-trays
+      - BOX=${BOX}
+      - TRAYTYPE=${TRAYTYPE}
+      - MQTTCLIENTID=${BOX}-${TRAYTYPE}
       - MQTTSERVERIP=${MQTTSERVERIP}
-      - MQTTUSERNAME=${MQTTUSERNAME}
+      - MQTTUSERNAME=${BOX}
       - MQTTPASSWORD=${MQTTPASSWORD}
       - MQTTPORT=${MQTTPORT}
+      - NODEREDPORT=60428
+      - ENABLE_NODERED_EDITOR=0
 
