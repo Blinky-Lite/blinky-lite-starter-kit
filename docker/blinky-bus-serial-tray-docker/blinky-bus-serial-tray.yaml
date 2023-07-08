@@ -9,8 +9,10 @@ services:
     ports:
       - "${NODEREDPORT}:1881"
     environment:
-      - MQTTCLIENTID=${TRAY}-${TRAYNAME}
-      - MQTTSUBSCRIBE=blinky-lite-box/${TRAY}/${TRAYNAME}/setting/#
+      - BOX=${BOX}
+      - TRAYTYPE=${TRAYTYPE}
+      - TRAYNAME=${TRAYNAME}
+      - MQTTCLIENTID=${MQTTCLIENTID}
       - MQTTSERVERIP=${MQTTSERVERIP}
       - MQTTUSERNAME=${MQTTUSERNAME}
       - MQTTPASSWORD=${MQTTPASSWORD}
@@ -18,4 +20,8 @@ services:
       - SERIALBUFSIZE=${SERIALBUFSIZE}
       - POLLINTERVAL=${POLLINTERVAL}
       - BAUDRATE=${BAUDRATE}
+      - SERIALPORT=/dev/ttyACM0
+      - NODEREDPORT=1881
+      - ENABLE_NODERED_EDITOR=0
+
   
