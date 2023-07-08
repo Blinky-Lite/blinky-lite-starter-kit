@@ -1,8 +1,10 @@
 DOCKER_DEFAULT_PLATFORM=linux/amd64
-TRAYTYPE=blinky-shelly
-MQTTSERVERIP=192.168.1.211
-MQTTUSERNAME=blinky-lite
+BOX=blinky-lite-box-01
+MQTTCLIENTID=blinky-lite-box-01-blinky-shelly-trays-01
+MQTTSERVERIP=192.168.1.161
+MQTTUSERNAME=blinky-lite-box-01
 MQTTPASSWORD=areallybadpassword
 MQTTPORT=1883
+SHELLYMQTTLEAD=shellies/blinky-hub
 NODEREDPORT=60429
 
