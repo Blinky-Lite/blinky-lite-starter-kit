@@ -5,8 +5,10 @@ services:
     ports:
       - "${NODEREDPORT}:1880"
     environment:
-      - MQTTCLIENTID=${TRAY}-${TRAYNAME}
-      - MQTTSUBSCRIBE=blinky-lite-box/${TRAY}/${TRAYNAME}/setting/#
+      - BOX=${BOX}
+      - TRAYTYPE=${TRAY}
+      - TRAYNAME=${TRAYNAME}
+      - MQTTCLIENTID=${MQTTCLIENTID}
       - MQTTSERVERIP=${MQTTSERVERIP}
       - MQTTUSERNAME=${MQTTUSERNAME}
       - MQTTPASSWORD=${MQTTPASSWORD}
@@ -14,4 +16,6 @@ services:
       - TESTMODE=${TESTMODE}
       - MODBUSIP=${MODBUSIP}
       - MODBUSPORT=${MODBUSPORT}
-  
+      - NODEREDPORT=1880
+      - ENABLE_NODERED_EDITOR=0
+
