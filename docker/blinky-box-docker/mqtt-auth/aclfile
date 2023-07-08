@@ -1,0 +1,36 @@
+user blinky-lite-box-01
+topic readwrite blinky-lite-box-01/#
+topic readwrite +/blinky-hub/#
+
+user blinky-lite-box-01-blinky-modbus-01
+topic read blinky-lite-box-01/tray/blinky-modbus/01/setting/#
+topic write blinky-lite-box-01/tray/blinky-modbus/01/reading
+topic write blinky-lite-box-01/tray/blinky-modbus/01/archive
+topic write blinky-lite-box-01/tray/blinky-modbus/01/echo
+
+user blinky-lite-box-01-blinky-mqtt-picoW-01
+topic read blinky-lite-box-01/cube/blinky-mqtt/picoW-01/setting
+topic write blinky-lite-box-01/cube/blinky-mqtt/picoW-01/reading
+
+user blinky-lite-box-01-blinky-mqtt-picoW-02
+topic read blinky-lite-box-01/cube/blinky-mqtt/picoW-02/setting
+topic write blinky-lite-box-01/cube/blinky-mqtt/picoW-02/reading
+
+user blinky-lite-box-01-blinky-bus-serial-01
+topic read blinky-lite-box-01/tray/blinky-bus-serial/01/setting/#
+topic write blinky-lite-box-01/tray/blinky-bus-serial/01/reading
+topic write blinky-lite-box-01/tray/blinky-bus-serial/01/archive
+topic write blinky-lite-box-01/tray/blinky-bus-serial/01/echo
+
+user blinky-lite-box-01-shellyplug-s-81C56E
+topic read shellies/blinky-hub/shellyplug-s/81C56E/relay/0/command
+topic write shellies/blinky-hub/shellyplug-s/81C56E/#
+
+user blinky-lite-box-01-shellyht-00EE18
+topic write shellies/blinky-hub/shellyht/00EE18/sensor/#
+
+user blinky-lite-box-01-blinky-mqtt-maxi-01
+topic read blinky-lite-box-01/cube/blinky-mqtt/maxi-01/setting
+topic write blinky-lite-box-01/cube/blinky-mqtt/maxi-01/reading
+
+

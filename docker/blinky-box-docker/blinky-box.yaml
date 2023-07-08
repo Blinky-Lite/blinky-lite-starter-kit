@@ -54,17 +54,25 @@ services:
       - ./blinky-lite-icons:/data/html-static/img
       - ./mqtt-auth:/data/mqtt-auth
     environment:
-      - JWTKEYSECRET=${JWTKEYSECRET}
+      - BOX=${BOX}
+      - MONGODBIP=mongodb://admin:${BLINKYLITE_PASSWORD}@blinky-box-docker-mongo-1:27017/blinky-lite?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-256
+      - MQTTCLIENTID=${BOX}
+      - MQTTSERVERIP=blinky-box-docker-mosquitto-1
+      - MQTTUSERNAME=${BOX}
       - MQTTPASSWORD=${BLINKYLITE_PASSWORD}
       - MQTTPORT=${MQTTPORT}
-      - MONGODBIP=mongodb://admin:${BLINKYLITE_PASSWORD}@blinky-box-docker-mongo-1:27017/blinky-lite?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-256
+      - MQTTACLDATADIR=/data/mqtt-auth
       - NEXMOAPIKEY=${NEXMOAPIKEY}
       - NEXMOAPISECRET=${NEXMOAPISECRET}
+      - JWTKEYSECRET=${JWTKEYSECRET}
       - MAXDBSIZE=${MAXDBSIZE}
+      - IPREFWEB=https://www.blinky-lite.se
       - TWOFA=${TWOFA}
       - ENABLEARCHIVE=${ENABLEARCHIVE}
-      - BOXUSERPW=${BLINKYLITE_PASSWORD}
+      - NODEREDPORT=60427
+      - HTMLSTATICDIR=/data/html-static
       - REQUIREHTTPS=${REQUIREHTTPS}
+      - ENABLE_NODERED_EDITOR=0
     healthcheck:
       test: curl --fail http://localhost:60427/health || exit 1
       interval: 3s
