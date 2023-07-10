@@ -1,5 +1,5 @@
-DOCKER_DEFAULT_PLATFORM=linux/amd64
-HARDWARE=amd64
+#DOCKER_DEFAULT_PLATFORM=linux/amd64
+HARDWARE=arm32v7
 BOX=blinky-lite-box-01
 TRAY=blinky-modbus
 TRAYNAME=01
